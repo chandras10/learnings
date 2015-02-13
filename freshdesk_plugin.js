@@ -76,9 +76,11 @@ function makePhoneCall(agent, customer) {
              'agent': agent},
       dataType: 'json',
       success: function(response) {
+      	  console.log(response);
       	  alert(response);
       },
       error: function(response) {
+      	  console.log(response);
       	  alert(response);
       }
   });
