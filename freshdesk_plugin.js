@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
        	     numberToCall = jQuery(self).text().strip();
        	  } else if (jQuery('#contactHeaderSticky')) {
        	     //CALL button is within customer/contact detail view.
-       	     numberToCall = jQuery('#userid').val();
+       	     numberToCall = self['data-phone-number'];
        	  }
          
           extractAgentPhoneNumber(function(agentNumber) {
@@ -94,7 +94,9 @@ jQuery(document).ready(function() {
        	  var phoneFields = jQuery('.can-make-calls');
           phoneFields.each(function(i, f) {
               var label = jQuery(f).prev('.field-label')[0].textContent;
-              var btnHTML = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i> ' + 
+              var phoneNumber =f.textContent; 
+              var btnHTML = '<a href="#" class="btn knowlarity_call_btn" data-phone-number=' + 
+                             phoneNumber + '><i class="ficon-phone"></i> ' + 
                             label + '</a>';
               jQuery(btnGroup).prepend(jQuery(btnHTML));
           });
