@@ -70,7 +70,7 @@ function makePhoneCall(agent, customer) {
   
   jQuery.ajax({
       method: "POST",
-      url: 'http://54.251.123.50/gsearch/fakecall/',
+      url: 'https://54.251.123.50/gsearch/fakecall/',
       data: {clientURL: location[1], customer: customer, agent: agent},
       success: function(response) {
       	  console.log(JSON.stringify(response));
