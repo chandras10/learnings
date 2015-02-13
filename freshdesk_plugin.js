@@ -77,7 +77,7 @@ jQuery(document).ready(function() {
        	     numberToCall = jQuery(self).text().strip();
        	  } else if (jQuery('#contactHeaderSticky')) {
        	     //CALL button is within customer/contact detail view.
-       	     numberToCall = self['data-phone-number'];
+       	     numberToCall = jQuery(self).attr('data-phone-number')
        	  }
          
           extractAgentPhoneNumber(function(agentNumber) {
