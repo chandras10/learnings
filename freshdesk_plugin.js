@@ -71,7 +71,16 @@ jQuery(document).ready(function() {
           jQuery(this).addClass('btn');
        });
        jQuery(document).on('click','.knowlarity_call_btn',function(){
-         var numberToCall = jQuery(this).text().strip();
+       	  var self = this;
+       	  var numberToCall = null;
+       	  if (jQuery('#knowlarity_call_details').length) {
+       	     #CALL button is within the ticket detail view.
+       	     numberToCall = jQuery(self).text().strip();
+       	  } else if (jQuery('#contactHeaderSticky')) {
+       	     #CALL button is within customer/contact detail view.
+       	     numberToCall = jQuery('#userid').val();
+       	  }
+         
           extractAgentPhoneNumber(function(agentNumber) {
               if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
                   console.log("Agent's phone number is not defined.");
@@ -82,9 +91,14 @@ jQuery(document).ready(function() {
        }); //onclick()
        
        if (jQuery('#contactHeaderSticky').length) {
-       	  var obj = jQuery('#contactHeaderSticky  .btn-group');
-       	  var btn = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i> Call</a>';
-          jQuery(obj).prepend(jQuery(btn));
+       	  var btnGroup = jQuery('#contactHeaderSticky  .btn-group');
+       	  var phoneFields = jQuery('.can-make-calls');
+          phoneFields.each(function(i, f) {
+              var label = jQuery(f).prev('.field-label')[0].textContent;
+              var btnHTML = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i>' + 
+                            label + '</a>';
+              jQuery(btnGroup).prepend(jQuery(btnHTML));
+          });
        }
     }//LoggedOptions?
 });
