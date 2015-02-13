@@ -77,11 +77,11 @@ function makePhoneCall(agent, customer) {
       dataType: 'json',
       success: function(response) {
       	  console.log(response);
-      	  alert(response);
+      	  alert('Done');
       },
       error: function(response) {
       	  console.log(response);
-      	  alert(response);
+      	  alert('error');
       }
   });
 }
