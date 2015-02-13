@@ -74,10 +74,10 @@ jQuery(document).ready(function() {
        	  var self = this;
        	  var numberToCall = null;
        	  if (jQuery('#knowlarity_call_details').length) {
-       	     #CALL button is within the ticket detail view.
+       	     //CALL button is within the ticket detail view.
        	     numberToCall = jQuery(self).text().strip();
        	  } else if (jQuery('#contactHeaderSticky')) {
-       	     #CALL button is within customer/contact detail view.
+       	     //CALL button is within customer/contact detail view.
        	     numberToCall = jQuery('#userid').val();
        	  }
          
