@@ -68,6 +68,13 @@ function makePhoneCall(agent, customer) {
     return;
   }
   
+  if (agent.length == 10) {
+  	agent = "+91" + agent;
+  }
+  if (customer.length == 10) {
+  	customer = "+91" + customer;
+  }
+
   jQuery.ajax({
       method: "GET",
       url: 'https://54.251.123.50/gsearch/fakecall/',
