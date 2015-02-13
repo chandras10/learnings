@@ -26,7 +26,7 @@ function eraseCookie(name) {
 var userCookieName = 'userInfo_for_knowlarity';
 function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
-    console.log("Top level read cookie: " + userInfo);
+    //console.log("Top level read cookie: " + userInfo);
     if (userInfo) {
        var user = JSON.parse(userInfo);
        if (user.phone) return callback(user.phone);
