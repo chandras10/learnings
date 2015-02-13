@@ -24,16 +24,6 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 
-function getAgent() {
-  jQuery.ajax({
-    url: '/agents.json',
-    data: {query: "email is {{ticket.agent.email}}"},
-    success: function(res) {
-      alert(res);
-    }
-  });
-}
-  
 var userCookieName = 'userInfo_for_knowlarity';
 function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
@@ -87,10 +77,15 @@ jQuery(document).ready(function() {
                   console.log("Agent's phone number is not defined.");
                   return;
               }
-              getAgent();
               alert(numberToCall + " will be called with agent number: " + agentNumber);
           });
        }); //onclick()
+       
+       if (jQuery('#contactsTab').length) {
+       	  jQuery('.user_actions').each(function(e, obj) {
+  		jQuery(obj).prepend(jQuery('<a href="#" class="btn btn-mini knowlarity_call_btn"><i class="ficon-phone"></i> Call</a>'));
+	  });
+       }
     }
 });
 
