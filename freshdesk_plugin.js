@@ -83,9 +83,10 @@ jQuery(document).ready(function() {
        
        if (jQuery('#contactsTab').length) {
        	  jQuery('.user_actions').each(function(e, obj) {
+       	  	console.log(e);
   		jQuery(obj).prepend(jQuery('<a href="#" class="btn btn-mini knowlarity_call_btn"><i class="ficon-phone"></i> Call</a>'));
 	  });
        }
-    }
+    }//LoggedOptions?
 });
 
