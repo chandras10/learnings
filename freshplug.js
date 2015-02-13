@@ -1,4 +1,4 @@
-<script type="text/javascript">
+
 function createCookie(name,value,days) {
 	if (days) {
 		var date = new Date();
@@ -93,4 +93,4 @@ jQuery(document).ready(function() {
        }); //onclick()
     }
 });
-</script>
+
