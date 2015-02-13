@@ -69,7 +69,7 @@ function makePhoneCall(agent, customer) {
   }
   
   jQuery.ajax({
-      method: "POST",
+      method: "GET",
       url: 'https://54.251.123.50/gsearch/fakecall/',
       dataType: 'json',
       beforeSend: function (request)
