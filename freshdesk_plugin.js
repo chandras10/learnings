@@ -67,24 +67,20 @@ function makePhoneCall(agent, customer) {
   if (!location || (location.length <= 0)) {
     return;
   }
-var proxyBundle = { domain:'http://54.251.123.50/gsearch', 
-                    ssl_enabled: false, 
-                    auth_type : "NoAuth" };  
-var callRequest = {
+  
+  jQuery.ajax({
       method: "POST",
-      url: 'fakecall/',
+      url: 'http://54.251.123.50/gsearch/fakecall/',
       data: {clientURL: location[1], customer: customer, agent: agent},
-      on_success: function(response) {
+      success: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert('Done');
+      	  alert(JSON.stringify(response));
       },
-      on_error: function(response) {
+      error: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert('error');
+      	  alert(JSON.stringify(response));
       }
-  };
-  var proxy = new Freshdesk.Widget(proxyBundle);
-  proxy.request(callRequest);
+  });
 }
 
 jQuery(document).ready(function() {
