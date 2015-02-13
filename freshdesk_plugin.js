@@ -81,11 +81,10 @@ jQuery(document).ready(function() {
           });
        }); //onclick()
        
-       if (jQuery('#contactsTab').length) {
-       	  jQuery('.user_actions').each(function(e, obj) {
-       	  	console.log(e);
-  		jQuery(obj).prepend(jQuery('<a href="#" class="btn btn-mini knowlarity_call_btn"><i class="ficon-phone"></i> Call</a>'));
-	  });
+       if (jQuery('#contactHeaderSticky').length) {
+       	  var obj = jQuery('#contactHeaderSticky  .btn-group');
+       	  var btn = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i> Call</a>';
+          jQuery(obj).prepend(jQuery(btn));
        }
     }//LoggedOptions?
 });
