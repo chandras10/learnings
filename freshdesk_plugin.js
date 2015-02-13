@@ -94,7 +94,7 @@ jQuery(document).ready(function() {
        	  var phoneFields = jQuery('.can-make-calls');
           phoneFields.each(function(i, f) {
               var label = jQuery(f).prev('.field-label')[0].textContent;
-              var btnHTML = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i>' + 
+              var btnHTML = '<a href="#" class="btn knowlarity_call_btn"><i class="ficon-phone"></i> ' + 
                             label + '</a>';
               jQuery(btnGroup).prepend(jQuery(btnHTML));
           });
