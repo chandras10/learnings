@@ -72,6 +72,12 @@ function makePhoneCall(agent, customer) {
       method: "POST",
       url: 'https://54.251.123.50/gsearch/fakecall/',
       dataType: 'json',
+      beforeSend: function (request)
+            {
+                request.setRequestHeader("Access-Control-Allow-Origin", "*");
+                request.setRequestHeader("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+                request.setRequestHeader("Access-Control-Allow-Headers", "Content-Type, Content-Range, Content-Disposition, Content-Description");
+            },      
       data: {clientURL: location[1], customer: customer, agent: agent},
       success: function(response) {
       	  console.log(JSON.stringify(response));
