@@ -62,6 +62,28 @@ function extractAgentPhoneNumber(callback) {
     });
 } //extractAgentPhoneNumber()
 
+function makePhoneCall(agent, customer) {
+  var location = (window.location.href).match(/^(https:\/\/(.*?))\//i);
+  if (!location || (location.length <= 0)) {
+    return;
+  }
+  
+  jQuery.ajax({
+      type: "POST",
+      url: 'http://54.251.123.50/gsearch/fakecall/',
+      data: {'clientURL': location[1],
+             'customer': customer,
+             'agent': agent},
+      dataType: 'json',
+      success: function(response) {
+      	  alert(response);
+      },
+      error: function(response) {
+      	  alert(response);
+      }
+  });
+}
+
 jQuery(document).ready(function() {
     //Extract the logged-in agent's phone number and save to a cookie.
     //This number will be used for making calls to customers later.
@@ -85,7 +107,8 @@ jQuery(document).ready(function() {
                   console.log("Agent's phone number is not defined.");
                   return;
               }
-              alert(numberToCall + " will be called with agent number: " + agentNumber);
+              makePhoneCall(agentNumber, numberToCall);
+              //alert(numberToCall + " will be called with agent number: " + agentNumber);
           });
        }); //onclick()
        
