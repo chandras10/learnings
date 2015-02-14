@@ -149,7 +149,7 @@ jQuery(document).ready(function() {
   source.addEventListener('requests', log, false);
   source.addEventListener('myevent', function(e) {
     data = JSON.parse(e.data);
-    // .. do something..
+    alert(data);
   }, false);
   source.addEventListener('uptime', log, false);
 
