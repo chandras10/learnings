@@ -154,6 +154,7 @@ jQuery(document).ready(function() {
   source.addEventListener('uptime', log, false);
 
   source.onmessage = function() {
+    alert(arguments);
     console.log(arguments);
   };
 });
