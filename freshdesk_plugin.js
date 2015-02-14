@@ -131,5 +131,30 @@ jQuery(document).ready(function() {
           });
        }
     }//LoggedOptions?
+      var source = new EventSource('/sse/'); // of course this must match the endpoint in your urlconf
+
+  function log() {
+    console.log(arguments);
+  }
+
+  source.onopen = function() {
+    console.log(arguments);
+  };
+
+  source.onerror = function () {
+    console.log(arguments);
+  };
+
+  source.addEventListener('connections', log, false);
+  source.addEventListener('requests', log, false);
+  source.addEventListener('myevent', function(e) {
+    data = JSON.parse(e.data);
+    // .. do something..
+  }, false);
+  source.addEventListener('uptime', log, false);
+
+  source.onmessage = function() {
+    console.log(arguments);
+  };
 });
 
