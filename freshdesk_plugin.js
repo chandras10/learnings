@@ -101,7 +101,7 @@ jQuery(document).ready(function() {
        
        var phoneFields = jQuery('.can-make-calls');
        phoneFields.each(function(i, f) {
-       	  f.addClass('btn');
+       	  jQuery(f).addClass('btn');
        	  if (f.innerHTML.indexOf('ficon-phone') < 0) {
        	     f.innerHTML = '<i class="ficon-phone"></i> '+f.innerHTML;
        	  }
