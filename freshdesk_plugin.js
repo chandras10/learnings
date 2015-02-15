@@ -77,9 +77,16 @@ function makePhoneCall(agent, customer) {
 
   jQuery.ajax({
       method: "GET",
-      url: 'https://54.251.123.50/gsearch/fakecall/',
+      //url: 'https://54.251.123.50/gsearch/fakecall/',
+      url: 'http://www.knowlarity.com/vr/api/click2call/',
       dataType: 'json',
-      data: {clientURL: location[1], customer: customer, agent: agent},
+      //data: {customer: customer, agent: agent},
+      data: {api_key: KNOWLARITY_API_KEY, 
+             sr_number: KNOWLARITY_NUMBER, 
+             response_format: 'json',
+      	     agent_number: agent,
+      	     phone_number: customer
+      },
       success: function(response) {
       	  console.log(JSON.stringify(response));
       	  alert(JSON.stringify(response));
