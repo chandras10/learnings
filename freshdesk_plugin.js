@@ -63,11 +63,7 @@ function extractAgentPhoneNumber(callback) {
 } //extractAgentPhoneNumber()
 
 function makePhoneCall(agent, customer) {
-  var location = (window.location.href).match(/^(https:\/\/(.*?))\//i);
-  if (!location || (location.length <= 0)) {
-    return;
-  }
-  
+
   if (agent.length == 10) {
   	agent = "+91" + agent;
   }
@@ -102,10 +98,14 @@ jQuery(document).ready(function() {
     //Extract the logged-in agent's phone number and save to a cookie.
     //This number will be used for making calls to customers later.
     if (jQuery('#LoggedOptions').length) {
-       jQuery('.knowlarity_call_btn').each(function(i) {
-          jQuery(this).addClass('btn');
+       
+       var phoneFields = jQuery('.can-make-calls');
+       phoneFields.each(function(i, f) {
+       	  f.addClass('btn');
+       	  console.log(f.textContent);
        });
-       jQuery(document).on('click','.knowlarity_call_btn',function(){
+       
+       jQuery(document).on('click','.can-make-calls',function(){
        	  var self = this;
        	  var numberToCall = null;
        	  if (jQuery('#knowlarity_call_details').length) {
