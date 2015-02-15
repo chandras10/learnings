@@ -102,7 +102,9 @@ jQuery(document).ready(function() {
        var phoneFields = jQuery('.can-make-calls');
        phoneFields.each(function(i, f) {
        	  f.addClass('btn');
-       	  console.log(f.textContent);
+       	  if (f.innerHTML.indexOf('ficon-phone') < 0) {
+       	     f.innerHTML = '<i class="ficon-phone"></i> '+f.innerHTML;
+       	  }
        });
        
        jQuery(document).on('click','.can-make-calls',function(){
@@ -126,7 +128,7 @@ jQuery(document).ready(function() {
           });
        }); //onclick()
        
-       if (jQuery('#contactHeaderSticky').length) {
+       /*if (jQuery('#contactHeaderSticky').length) {
        	  var btnGroup = jQuery('#contactHeaderSticky  .btn-group');
        	  var phoneFields = jQuery('.can-make-calls');
           phoneFields.each(function(i, f) {
@@ -136,33 +138,5 @@ jQuery(document).ready(function() {
                             + '><i class="ficon-phone"></i> ' + label + '</a>';
               jQuery(btnGroup).prepend(jQuery(btnHTML));
           });
-       }
+       }*/
     }//LoggedOptions?
-      var source = new EventSource('/sse/'); // of course this must match the endpoint in your urlconf
-
-  function log() {
-    console.log(arguments);
-  }
-
-  source.onopen = function() {
-    console.log(arguments);
-  };
-
-  source.onerror = function () {
-    console.log(arguments);
-  };
-
-  source.addEventListener('connections', log, false);
-  source.addEventListener('requests', log, false);
-  source.addEventListener('myevent', function(e) {
-    data = JSON.parse(e.data);
-    alert(data);
-  }, false);
-  source.addEventListener('uptime', log, false);
-
-  source.onmessage = function() {
-    alert(arguments);
-    console.log(arguments);
-  };
-});
-
