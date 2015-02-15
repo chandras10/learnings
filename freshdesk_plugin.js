@@ -98,7 +98,7 @@ jQuery(document).ready(function() {
     //Extract the logged-in agent's phone number and save to a cookie.
     //This number will be used for making calls to customers later.
     if (jQuery('#LoggedOptions').length) {
-       
+       //Adding a button to all phone fields to enable Click2Call functionality
        var phoneFields = jQuery('.can-make-calls');
        phoneFields.each(function(i, f) {
        	  jQuery(f).addClass('btn');
@@ -128,16 +128,5 @@ jQuery(document).ready(function() {
           });
        }); //onclick()
        
-       /*if (jQuery('#contactHeaderSticky').length) {
-       	  var btnGroup = jQuery('#contactHeaderSticky  .btn-group');
-       	  var phoneFields = jQuery('.can-make-calls');
-          phoneFields.each(function(i, f) {
-              var label = jQuery(f).prev('.field-label')[0].textContent;
-              var phoneNumber =f.textContent; 
-              var btnHTML = '<a href="#" class="btn knowlarity_call_btn" data-phone-number=' + phoneNumber 
-                            + '><i class="ficon-phone"></i> ' + label + '</a>';
-              jQuery(btnGroup).prepend(jQuery(btnHTML));
-          });
-       }*/
     }//LoggedOptions?
 });
