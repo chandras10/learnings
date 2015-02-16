@@ -180,8 +180,6 @@ jQuery(document).ready(function() {
             };
         };
         /// *** END OF STOMP POPUP MESSAGE HANDLING *** ///
-       	
-       }    
     }//LoggedOptions?
    
 });
