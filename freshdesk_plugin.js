@@ -159,16 +159,12 @@ jQuery(document).ready(function() {
             onmessage = function(message) {
                 data = JSON.parse(message.body);
                 console.log(data);
-                alert(message.body);
-                alert(data.called);
                 extractAgentPhoneNumber(function(agentNumber) {
                   if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
                      console.log("Agent's phone number is not defined.");
                      return;
                   }
                   
-                  console.log(agentNumber);
-                  alert(data);
                   if (data.called && (data.called.indexOf(agentNumber) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
                   	          "Display number: " + data.disp_number;
