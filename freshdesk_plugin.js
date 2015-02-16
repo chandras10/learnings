@@ -165,8 +165,8 @@ jQuery(document).ready(function() {
                      return;
                   }
                   
-                  if (data["Callee"] && (data["Callee"].indexOf(agentNumber) >= 0)) {
-                  	var msg = "Incoming call from: " + data["Caller"] + "\n" +
+                  if (data["called"] && (data["called"].indexOf(agentNumber) >= 0)) {
+                  	var msg = "Incoming call from: " + data["caller"] + "\n" +
                   	          "Display number: " + data["disp_number"];
                   	alert(msg);
                   }
