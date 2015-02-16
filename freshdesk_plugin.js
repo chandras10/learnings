@@ -65,11 +65,11 @@ function extractAgentPhoneNumber(callback) {
 
 function makePhoneCall(agent, customer) {
 
-  if (agent.length == 10) {
-  	agent = "+91" + agent;
+  if (agent) {
+  	agent = "+91" + agent.substr(agent.length - 10);
   }
-  if (customer.length == 10) {
-  	customer = "+91" + customer;
+  if (customer) {
+  	customer = "+91" + customer.substr(customer.length - 10);
   }
 
   jQuery.ajax({
