@@ -137,7 +137,7 @@ jQuery(document).ready(function() {
             // automatically called when there is an error connecting to STOMP
             var error_callback = function(error) {
                 // log the error's message header:
-                console.log(error.headers.message);
+                console.log("stomp: " + error.headers.message);
 
                 // the client is disconnected,
                 // set the already_connected boolean variable to FALSE
@@ -153,20 +153,21 @@ jQuery(document).ready(function() {
                 // subscribe to the "bridge" topic only after connection
                 // and authentication is successful
                 var subscription = client.subscribe("/topic/bridge", onmessage);
+                console.log("stomp: subscribed to /topic/bridge");
             };
 
             // called every time there is a new published message
             // (i.e. "bridge" incoming phone call)
             onmessage = function(message) {
                 data = JSON.parse(message.body);
-                console.log(data);
+                console.log("stomp: " + data);
                 extractAgentPhoneNumber(function(agentNumber) {
                   if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
-                     console.log("Agent's phone number is not defined.");
+                     console.log("stomp: Agent's phone number is not defined.");
                      return;
                   }
                   
-                  console.log("Called: " + data.called + "\nAgent: " + agentNumber);
+                  console.log("stomp: " + "Called: " + data.called + "\nAgent: " + agentNumber);
                   
                   if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
@@ -180,6 +181,7 @@ jQuery(document).ready(function() {
             // the Web Socket is not already connected
             if (already_connected == "FALSE") {
                 //alert("trying to connect");
+                console.log("stomp: trying to connect to STOMP server");
                 // connect to the Apollo ActiveMQ STOMP message broker
                 client.connect("vtigercrm", "vtiger6", connect_callback, error_callback);
             }
