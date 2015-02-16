@@ -168,7 +168,7 @@ jQuery(document).ready(function() {
                   
                   console.log("Called: " + data.called + "\nAgent: " + agentNumber);
                   
-                  if (data.called && (data.called.indexOf(agentNumber) >= 0)) {
+                  if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
                   	          "Display number: " + data.disp_number;
                   	alert(msg);
