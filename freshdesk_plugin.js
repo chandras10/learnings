@@ -85,14 +85,11 @@ function makePhoneCall(agent, customer) {
       },
       success: function(response) {
       	  console.log(JSON.stringify(response));
-      	  var msg = "Call placed successfully via your number: " + agent;
-      	  alert(msg);
+      	  alert(JSON.stringify(response));
       },
       error: function(response) {
       	  console.log(JSON.stringify(response));
-      	  //alert(JSON.stringify(response));
-      	  var errMsg = "Could not place the call. Please ensure that you have unblocked mixed content in your browser " +
-      	               "and your knowlarity account is fine. Error message from API: \n" + response.statusText;
+      	  alert(JSON.stringify(response));
       }
   });
 }
@@ -130,6 +127,61 @@ jQuery(document).ready(function() {
               //alert(numberToCall + " will be called with agent number: " + agentNumber);
           });
        }); //onclick()
-       
+   
+       {
+	       var url = "ws://54.251.123.50:11111/mybroker";
+	       var client = Stomp.client(url);
+
+            // automatically called when there is an error connecting to STOMP
+            var error_callback = function(error) {
+                // log the error's message header:
+                console.log(error.headers.message);
+
+                // the client is disconnected,
+                // set the already_connected boolean variable to FALSE
+                already_connected = "FALSE";
+            };
+
+            // automatically called when the STOMP connection is successful
+            var connect_callback = function() {
+                // the client is connected,
+                // set the already_connected boolean variable to TRUE
+                already_connected = "TRUE";
+
+                // subscribe to the "bridge" topic only after connection
+                // and authentication is successful
+                var subscription = client.subscribe("/topic/bridge", onmessage);
+            };
+
+            // called every time there is a new published message
+            // (i.e. "bridge" incoming phone call)
+            onmessage = function(message) {
+                data = JSON.parse(message.body);
+                extractAgentPhoneNumber(function(agentNumber) {
+                  if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
+                     console.log("Agent's phone number is not defined.");
+                     return;
+                  }
+                  
+                  if (data["Callee"] && (data["Callee"].indexOf(agentNumber) >= 0)) {
+                  	var msg = "Incoming call from: " + data["Caller"] + "\n" +
+                  	          "Display number: " + data["disp_number"];
+                  	alert(msg);
+                  }
+                });
+            };
+
+            // only issue a connect command if
+            // the Web Socket is not already connected
+            if (already_connected == "FALSE") {
+                //alert("trying to connect");
+                // connect to the Apollo ActiveMQ STOMP message broker
+                client.connect("vtigercrm", "vtiger6", connect_callback, error_callback);
+            };
+        };
+        /// *** END OF STOMP POPUP MESSAGE HANDLING *** ///
+       	
+       }    
     }//LoggedOptions?
+   
 });
