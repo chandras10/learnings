@@ -23,6 +23,7 @@ function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
 
+
 var userCookieName = 'userInfo_for_knowlarity';
 function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
@@ -168,7 +169,7 @@ jQuery(document).ready(function() {
                   if (data.called && (data.called.indexOf(agentNumber) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
                   	          "Display number: " + data.disp_number;
-                  	alert(msg);
+                  	var n = noty({text: msg});
                   }
                 });
             };
