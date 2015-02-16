@@ -165,6 +165,8 @@ jQuery(document).ready(function() {
                      return;
                   }
                   
+                  console.log(agentNumber);
+                  alert(data);
                   if (data["called"] && (data["called"].indexOf(agentNumber) >= 0)) {
                   	var msg = "Incoming call from: " + data["caller"] + "\n" +
                   	          "Display number: " + data["disp_number"];
