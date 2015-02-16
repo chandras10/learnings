@@ -169,7 +169,7 @@ jQuery(document).ready(function() {
                   alert(data);
                   if (data.called && (data.called.indexOf(agentNumber) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
-                  	          "Display number: " + data.disp_number];
+                  	          "Display number: " + data.disp_number;
                   	alert(msg);
                   }
                 });
