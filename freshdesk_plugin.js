@@ -85,11 +85,14 @@ function makePhoneCall(agent, customer) {
       },
       success: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert(JSON.stringify(response));
+      	  var msg = "Call placed successfully via your number: " + agent;
+      	  alert(msg);
       },
       error: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert(JSON.stringify(response));
+      	  //alert(JSON.stringify(response));
+      	  var errMsg = "Could not place the call. Please ensure that you have unblocked mixed content in your browser " +
+      	               "and your knowlarity account is fine. Error message from API: \n" + response.statusText;
       }
   });
 }
