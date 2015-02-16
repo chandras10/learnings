@@ -131,6 +131,7 @@ jQuery(document).ready(function() {
        {
 	       var url = "ws://54.251.123.50:11111/mybroker";
 	       var client = Stomp.client(url);
+	       var already_connected = "FALSE";
 
             // automatically called when there is an error connecting to STOMP
             var error_callback = function(error) {
