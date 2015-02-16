@@ -158,6 +158,7 @@ jQuery(document).ready(function() {
             // (i.e. "bridge" incoming phone call)
             onmessage = function(message) {
                 data = JSON.parse(message.body);
+                console.log(data);
                 extractAgentPhoneNumber(function(agentNumber) {
                   if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
                      console.log("Agent's phone number is not defined.");
