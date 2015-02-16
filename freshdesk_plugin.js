@@ -160,6 +160,7 @@ jQuery(document).ready(function() {
                 data = JSON.parse(message.body);
                 console.log(data);
                 alert(message.body);
+                alert(data.called);
                 extractAgentPhoneNumber(function(agentNumber) {
                   if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
                      console.log("Agent's phone number is not defined.");
