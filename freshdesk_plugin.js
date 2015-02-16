@@ -177,8 +177,8 @@ jQuery(document).ready(function() {
                 //alert("trying to connect");
                 // connect to the Apollo ActiveMQ STOMP message broker
                 client.connect("vtigercrm", "vtiger6", connect_callback, error_callback);
-            };
-        };
+            }
+       }
         /// *** END OF STOMP POPUP MESSAGE HANDLING *** ///
     }//LoggedOptions?
    
