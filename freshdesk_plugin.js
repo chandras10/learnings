@@ -203,13 +203,12 @@ jQuery(document).ready(function() {
                   
                   if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
                     var contactInfo = null;
-                    if (data.contact) {
-                      console.log(data.contact);
-                      data.contact = JSON.parse(data.contact);
-                      //if (data.contact.id && data.contact.name) {
+                    if (typeof data.contact !== 'undefined') {
+			console.log(data.contact);
+                    	data.contact = JSON.parse(data.contact);
                         console.log("contact ID: " + data.contact.id);
-                      contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
-                      //}
+                      	contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
+ 
                     }
                     if (contactInfo === null) {
                       contactInfo = "\t" + data.called + "\n";
