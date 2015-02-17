@@ -26,10 +26,10 @@ function eraseCookie(name) {
 // Use jNotify if available, else use simple JS msgbox
 //
 function notify(ctx) {
-   if (typeof jNotify == 'undefined' || !jQuery.isFunction(jNotify)) {
+  // if (typeof jNotify == 'undefined' || !jQuery.isFunction(jNotify)) {
    	alert(ctx.msg);
    	return;
-   }
+   //}
    
    jNotify(
 	ctx.msg,
