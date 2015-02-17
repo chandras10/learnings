@@ -210,7 +210,7 @@ jQuery(document).ready(function() {
                       data.contact = JSON.parse(data.contact);
                       //if (data.contact.id && data.contact.name) {
                         console.log("contact ID: " + data.contact.id);
-                      contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a>\n";
+                      contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
                       //}
                     }
                     if (contactInfo === null) {
