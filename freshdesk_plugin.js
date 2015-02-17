@@ -60,9 +60,11 @@ function extractAgentPhoneNumber(callback) {
     //console.log("Top level read cookie: " + userInfo);
     if (userInfo) {
        var user = JSON.parse(userInfo);
-       if (user.phone) return callback(user.phone);
-       if (user.mobile) return callback(user.mobile);
-       return callback(undefined);
+       if (user) {
+			if (user.phone) return callback(user.phone);
+			if (user.mobile) return callback(user.mobile);
+       		return callback(undefined);
+       }
     }
     //
     // Obtain agent user_id
