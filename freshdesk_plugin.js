@@ -54,7 +54,7 @@ function notify(ctx) {
 	}); // close jNotify   
 }//notify()
 
-var userCookieName = 'userInfo_for_knowlarity';
+var userCookieName = 'knowlarity_fd_user_info';
 function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
     //console.log("Top level read cookie: " + userInfo);
