@@ -22,7 +22,24 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
-
+//
+// Use jNotify if available, else use simple JS msgbox
+//
+function notify(ctx) {
+   if (typeof jNotify == 'undefined' || !jQuery.isFunction(jNotify)) {
+   	alert(ctx.msg);
+   	return;
+   }
+   
+   jNotify(
+	ctx.msg,
+	{
+	  autoHide : true,
+	  TimeShown : 3000,
+	  HorizontalPosition : 'center'
+	}
+   ); // close jNotify   
+}
 
 var userCookieName = 'userInfo_for_knowlarity';
 function extractAgentPhoneNumber(callback) {
@@ -86,11 +103,11 @@ function makePhoneCall(agent, customer) {
       },
       success: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert(JSON.stringify(response));
+      	  notify({msg: JSON.stringify(response)});
       },
       error: function(response) {
       	  console.log(JSON.stringify(response));
-      	  alert(JSON.stringify(response));
+      	  notify({msg: JSON.stringify(response)});
       }
   });
 }
@@ -172,7 +189,7 @@ jQuery(document).ready(function() {
                   if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
                   	var msg = "Incoming call from: " + data.caller + "\n" +
                   	          "Display number: " + data.disp_number;
-                  	alert(msg);
+                  	notify({msg: msg});
                   }
                 });
             };
