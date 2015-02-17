@@ -203,6 +203,7 @@ jQuery(document).ready(function() {
                   
                   if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
                     var contactInfo = null;
+                    console.log(data.contact);
                     if (typeof data.contact !== 'undefined') {
 			console.log(data.contact);
                     	data.contact = JSON.parse(data.contact);
