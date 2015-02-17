@@ -32,15 +32,30 @@ function notify(ctx) {
    	alert(ctx.msg);
    	return;
    //}
-   
    jNotify(
 	ctx.msg,
 	{
-	  autoHide : true,
-	  TimeShown : 3000,
-	  HorizontalPosition : 'center'
-	}
-   ); // close jNotify   
+		  autoHide : true, // added in v2.0
+		  clickOverlay : false, // added in v2.0
+		  MinWidth : 250,
+		  TimeShown : 5000,
+		  ShowTimeEffect : 200,
+		  HideTimeEffect : 200,
+		  LongTrip :20,
+		  HorizontalPosition : 'right',
+		  VerticalPosition : 'top',
+		  ShowOverlay : true,
+   		  ColorOverlay : '#000',
+		  OpacityOverlay : 0.3,
+		  onClosed : function(){ // added in v2.0
+		   
+		  },
+		  onCompleted : function(){ // added in v2.0
+		   
+		  }
+	}); // close jNotify   
+}
+   
 }
 
 var userCookieName = 'userInfo_for_knowlarity';
@@ -189,12 +204,24 @@ jQuery(document).ready(function() {
                   console.log("stomp: " + "Called: " + data.called + "\nAgent: " + agentNumber);
                   
                   if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
-                  	var msg = "Incoming call from: " + data.caller + "\n" +
+                    var contactInfo = null;
+                    if (data.contact) {
+                      console.log(data.contact);
+                      data.contact = JSON.parse(data.contact);
+                      //if (data.contact.id && data.contact.name) {
+                        console.log("contact ID: " + data.contact.id);
+                      contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a>\n";
+                      //}
+                    }
+                    if (contactInfo === null) {
+                      contactInfo = "\t" + data.called + "\n";
+                    }
+                  	var msg = "Incoming call from: " + contactInfo +
                   	          "Display number: " + data.disp_number;
                   	notify({msg: msg});
                   }
                 });
-            };
+            };//onmessage()
 
             // only issue a connect command if
             // the Web Socket is not already connected
