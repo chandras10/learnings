@@ -54,9 +54,7 @@ function notify(ctx) {
 		   
 		  }
 	}); // close jNotify   
-}
-   
-}
+}//notify()
 
 var userCookieName = 'userInfo_for_knowlarity';
 function extractAgentPhoneNumber(callback) {
