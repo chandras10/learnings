@@ -162,42 +162,16 @@ jQuery(document).ready(function() {
        }); //onclick()
    
        {
-	       var url = "ws://54.251.123.50:11111/mybroker";
-	       var client = Stomp.client(url);
-	       var already_connected = "FALSE";
-
-            // automatically called when there is an error connecting to STOMP
-            var error_callback = function(error) {
-                // log the error's message header:
-                console.log("stomp: " + error.headers.message);
-
-                // the client is disconnected,
-                // set the already_connected boolean variable to FALSE
-                already_connected = "FALSE";
-            };
-
-            // automatically called when the STOMP connection is successful
-            var connect_callback = function() {
-                // the client is connected,
-                // set the already_connected boolean variable to TRUE
-                already_connected = "TRUE";
-
-                // subscribe to the "bridge" topic only after connection
-                // and authentication is successful
-                var subscription = client.subscribe("/topic/bridge", onmessage);
-                console.log("stomp: subscribed to /topic/bridge");
-            };
-
-            // called every time there is a new published message
-            // (i.e. "bridge" incoming phone call)
-            onmessage = function(message) {
-                data = JSON.parse(message.body);
-                console.log("stomp: " + data);
-                extractAgentPhoneNumber(function(agentNumber) {
-                  if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
-                     console.log("stomp: Agent's phone number is not defined.");
-                     return;
-                  }
+		var source = new EventSource('http://54.251.123.50:11111/update-stream');
+		source.addEventListener('message', function(e) {
+			console.log(e);
+			var data = JSON.parse(e.data);
+        	console.log("stomp: " + data);
+        	extractAgentPhoneNumber(function(agentNumber) {
+                if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
+                    console.log("stomp: Agent's phone number is not defined.");
+                    return;
+                }
                   
                   console.log("stomp: " + "Called: " + data.called + "\nAgent: " + agentNumber);
                   
@@ -219,16 +193,7 @@ jQuery(document).ready(function() {
                   	notify({msg: msg});
                   }
                 });
-            };//onmessage()
-
-            // only issue a connect command if
-            // the Web Socket is not already connected
-            if (already_connected == "FALSE") {
-                //alert("trying to connect");
-                console.log("stomp: trying to connect to STOMP server");
-                // connect to the Apollo ActiveMQ STOMP message broker
-                client.connect("vtigercrm", "vtiger6", connect_callback, error_callback);
-            }
+            });//onmessage()
        }
         /// *** END OF STOMP POPUP MESSAGE HANDLING *** ///
     }//LoggedOptions?
