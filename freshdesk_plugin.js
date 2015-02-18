@@ -59,7 +59,6 @@ function notify(ctx) {
 var userCookieName = 'knowlarity_fd_user_info';
 function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
-    //console.log("Top level read cookie: " + userInfo);
     if (userInfo) {
        var user = JSON.parse(userInfo);
        if (user) {
@@ -108,10 +107,8 @@ function makePhoneCall(agent, customer) {
 
   jQuery.ajax({
       method: "GET",
-      //url: 'https://54.251.123.50/gsearch/fakecall/',
       url: 'http://www.knowlarity.com/vr/api/click2call/',
       dataType: 'json',
-      //data: {customer: customer, agent: agent},
       data: {api_key: KNOWLARITY_API_KEY, 
              sr_number: KNOWLARITY_NUMBER, 
              response_format: 'json',
