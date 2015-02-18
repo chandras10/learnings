@@ -162,7 +162,7 @@ jQuery(document).ready(function() {
        }); //onclick()
    
        {
-		var source = new EventSource('http://54.251.123.50:11111/update-stream');
+		var source = new EventSource('http://54.251.123.50:11111/update-stream/' + KNOWLARITY_NUMBER);
 		source.addEventListener('message', function(e) {
 			console.log(e);
 			var data = JSON.parse(e.data);
