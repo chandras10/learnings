@@ -179,17 +179,16 @@ jQuery(document).ready(function() {
                     var contactInfo = null;
                     console.log(data.contact);
                     if (typeof data.contact !== 'undefined') {
-			console.log(data.contact);
                     	data.contact = JSON.parse(data.contact);
                         console.log("contact ID: " + data.contact.id);
                       	contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
  
-                    }
-                    if (contactInfo === null) {
+                    } else {
                       contactInfo = "\t" + data.called + "\n";
                     }
                   	var msg = "Incoming call from: " + contactInfo +
                   	          "Display number: " + data.disp_number;
+                  	console.log(msg);
                   	notify({msg: msg});
                   }
                 });
