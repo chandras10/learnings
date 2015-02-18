@@ -27,9 +27,11 @@ function eraseCookie(name) {
 //
 function notify(ctx) {
    if (typeof jNotify == 'undefined' || !jQuery.isFunction(jNotify)) {
+   	console.log("Cant use jNotify.Msg = " + ctx.msg);
    	alert(ctx.msg);
    	return;
    }
+   console.log("In notify: " + ctx.msg);
    jNotify(
 	ctx.msg,
 	{
