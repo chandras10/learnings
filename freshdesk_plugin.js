@@ -45,7 +45,6 @@ function notify(ctx) {
    console.log("In notify: " + ctx.msg);
    loadfile("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.css", "css");
    loadfile("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js", "js");
-            console.log("jNotify script loaded. Status = " + textStatus);
             jNotify(
 	        ctx.msg,
 	        {
