@@ -117,7 +117,11 @@ function makePhoneCall(agent, customer) {
       },
       success: function(response) {
       	  console.log(JSON.stringify(response));
-      	  notify({msg: JSON.stringify(response)});
+      	  if (response.success) {
+		notify({msg: response.success.message});
+      	  } else {
+      	  	notify({msg: JSON.stringify(response)});
+      	  }
       },
       error: function(response) {
       	  console.log(JSON.stringify(response));
