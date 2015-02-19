@@ -34,9 +34,9 @@ function notify(ctx) {
             jNotify(
 	        ctx.msg,
 	        {
-		  		autoHide : true,
-		  		clickOverlay : false,
-		  		MinWidth : 250,
+		  		autoHide : false,
+		  		clickOverlay : true,
+		  		MinWidth : 400,
 		  		TimeShown : 5000,
 		  		ShowTimeEffect : 200,
 		  		HideTimeEffect : 200,
