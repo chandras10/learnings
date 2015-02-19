@@ -34,29 +34,25 @@ function notify(ctx) {
             jNotify(
 	        ctx.msg,
 	        {
-		  autoHide : true,
-		  clickOverlay : false,
-		  MinWidth : 250,
-		  TimeShown : 5000,
-		  ShowTimeEffect : 200,
-		  HideTimeEffect : 200,
-		  LongTrip :20,
-		  HorizontalPosition : 'right',
-		  VerticalPosition : 'top',
-		  ShowOverlay : true,
-   		  ColorOverlay : '#000',
-		  OpacityOverlay : 0.3,
-		  onClosed : function(){
-		   
-		  },
-		  onCompleted : function(){
-		   
-		  }
+		  		autoHide : true,
+		  		clickOverlay : false,
+		  		MinWidth : 250,
+		  		TimeShown : 5000,
+		  		ShowTimeEffect : 200,
+		  		HideTimeEffect : 200,
+		  		LongTrip :20,
+		  		HorizontalPosition : 'right',
+		  		VerticalPosition : 'top',
+		  		ShowOverlay : true,
+   		  		ColorOverlay : '#000',
+		  		OpacityOverlay : 0.3,
+		  		onClosed : function(){},
+		  		onCompleted : function(){}
 	        }); // close jNotify   
          }) //jNotify script loaded successfully...
          .fail(function(jqxhr, settings, exception) {
-   	    console.log("Cant use jNotify.Msg = " + ctx.msg);
-   	    alert(ctx.msg);
+   	    	console.log("Cant use jNotify.Msg = " + ctx.msg);
+   	    	alert(ctx.msg);
          });
 }//notify()
 
