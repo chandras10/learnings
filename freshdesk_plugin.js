@@ -130,6 +130,39 @@ function makePhoneCall(agent, customer) {
   });
 }
 
+function listenForPopupNotifications() {
+	var source = new EventSource('http://54.251.123.50:11111/update-stream/' + KNOWLARITY_NUMBER);
+	source.addEventListener('message', function(e) {
+		console.log(e);
+		var data = JSON.parse(e.data);
+        console.log("stomp: " + data);
+        extractAgentPhoneNumber(function(agentNumber) {
+            if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
+                console.log("stomp: Agent's phone number is not defined.");
+                return;
+            }
+                  
+            console.log("stomp: " + "Called: " + data.called + "\nAgent: " + agentNumber);
+                  
+            if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
+                var contactInfo = null;
+                console.log(data.contact);
+                if (typeof data.contact !== 'undefined') {
+                   	data.contact = JSON.parse(data.contact);
+                    console.log("contact ID: " + data.contact.id);
+                    contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
+                } else {
+                    contactInfo = "\t" + data.called + "\n";
+                }
+                var msg = "Incoming call from: " + contactInfo +
+                  	      "Display number: " + data.disp_number;
+                console.log(msg);
+                notify({msg: msg});
+            }
+        });
+    }); //addEventListener()
+}
+
 jQuery(document).ready(function() {
     //Extract the logged-in agent's phone number and save to a cookie.
     //This number will be used for making calls to customers later.
@@ -164,40 +197,7 @@ jQuery(document).ready(function() {
           });
        }); //onclick()
    
-       {
-		var source = new EventSource('http://54.251.123.50:11111/update-stream/' + KNOWLARITY_NUMBER);
-		source.addEventListener('message', function(e) {
-			console.log(e);
-			var data = JSON.parse(e.data);
-        	console.log("stomp: " + data);
-        	extractAgentPhoneNumber(function(agentNumber) {
-                if ((typeof agentNumber === 'undefined') || (agentNumber == null)) {
-                    console.log("stomp: Agent's phone number is not defined.");
-                    return;
-                }
-                  
-                  console.log("stomp: " + "Called: " + data.called + "\nAgent: " + agentNumber);
-                  
-                  if (data.called && (agentNumber.indexOf(data.called) >= 0)) {
-                    var contactInfo = null;
-                    console.log(data.contact);
-                    if (typeof data.contact !== 'undefined') {
-                    	data.contact = JSON.parse(data.contact);
-                        console.log("contact ID: " + data.contact.id);
-                      	contactInfo = "\t<a href=/contacts/" + data.contact.id + "><b>" + data.contact.name + "</b></a><br/>";
- 
-                    } else {
-                      contactInfo = "\t" + data.called + "\n";
-                    }
-                  	var msg = "Incoming call from: " + contactInfo +
-                  	          "Display number: " + data.disp_number;
-                  	console.log(msg);
-                  	notify({msg: msg});
-                  }
-                });
-            });//onmessage()
-       }
-        /// *** END OF STOMP POPUP MESSAGE HANDLING *** ///
+       listenForPopupNotifications();
     }//LoggedOptions?
    
 });
