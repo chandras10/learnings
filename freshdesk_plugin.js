@@ -22,29 +22,14 @@ function readCookie(name) {
 function eraseCookie(name) {
 	createCookie(name,"",-1);
 }
-
-function loadfile(filename, filetype){
-    if (filetype=="js"){ //if filename is a external JavaScript file
-        var fileref=document.createElement('script')
-        fileref.setAttribute("type","text/javascript")
-        fileref.setAttribute("src", filename)
-    }
-    else if (filetype=="css"){ //if filename is an external CSS file
-        var fileref=document.createElement("link")
-        fileref.setAttribute("rel", "stylesheet")
-        fileref.setAttribute("type", "text/css")
-        fileref.setAttribute("href", filename)
-    }
-    if (typeof fileref!="undefined")
-        document.getElementsByTagName("head")[0].appendChild(fileref)
-}
 //
 // Use jNotify if available, else use simple JS msgbox
 //
 function notify(ctx) {
    console.log("In notify: " + ctx.msg);
-   loadfile("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.css", "css");
-   loadfile("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js", "js");
+   jQuery.getScript("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js")
+         .done(function(script, textStatus) {
+            console.log("jNotify script loaded. Status = " + textStatus);
             jNotify(
 	        ctx.msg,
 	        {
@@ -67,11 +52,11 @@ function notify(ctx) {
 		   
 		  }
 	        }); // close jNotify   
-   /*      }) //jNotify script loaded successfully...
+         }) //jNotify script loaded successfully...
          .fail(function(jqxhr, settings, exception) {
    	    console.log("Cant use jNotify.Msg = " + ctx.msg);
    	    alert(ctx.msg);
-         });*/
+         });
 }//notify()
 
 var userCookieName = 'knowlarity_fd_user_info';
