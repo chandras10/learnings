@@ -26,15 +26,13 @@ function eraseCookie(name) {
 // Use jNotify if available, else use simple JS msgbox
 //
 function notify(ctx) {
-   if (typeof jNotify == 'undefined' || !jQuery.isFunction(jNotify)) {
-   	console.log("Cant use jNotify.Msg = " + ctx.msg);
-   	alert(ctx.msg);
-   	return;
-   }
    console.log("In notify: " + ctx.msg);
-   jNotify(
-	ctx.msg,
-	{
+   jQuery.getScript("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js")
+         .done(function(script, textStatus) {
+            console.log("jNotify script loaded. Status = " + textStatus);
+            jNotify(
+	        ctx.msg,
+	        {
 		  autoHide : true, // added in v2.0
 		  clickOverlay : false, // added in v2.0
 		  MinWidth : 250,
@@ -53,7 +51,12 @@ function notify(ctx) {
 		  onCompleted : function(){ // added in v2.0
 		   
 		  }
-	}); // close jNotify   
+	        }); // close jNotify   
+         }) //jNotify script loaded successfully...
+         .fail(function(jqxhr, settings, exception) {
+   	    console.log("Cant use jNotify.Msg = " + ctx.msg);
+   	    alert(ctx.msg);
+         });
 }//notify()
 
 var userCookieName = 'knowlarity_fd_user_info';
