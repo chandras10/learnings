@@ -87,8 +87,8 @@ function extractAgentPhoneNumber(callback) {
             if (rec.agent.user_id == user_id) {
               var data = {id: rec.agent.id, phone: rec.agent.user.phone, mobile: rec.agent.user.mobile};
               createCookie(userCookieName, JSON.stringify(data));
-              if (user.phone) return callback(user.phone);
-              if (user.mobile) return callback(user.mobile);
+              if (rec.agent.user.phone) return callback(rec.agent.user.phone);
+              if (rec.agent.user.mobile) return callback(rec.agent.user.mobile);
               return callback(undefined);
             }
           });
