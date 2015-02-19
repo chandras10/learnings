@@ -36,7 +36,7 @@ function notify(ctx) {
 	        {
 		  		autoHide : false,
 		  		clickOverlay : true,
-		  		MinWidth : 400,
+		  		MinWidth : 250,
 		  		TimeShown : 5000,
 		  		ShowTimeEffect : 200,
 		  		HideTimeEffect : 200,
