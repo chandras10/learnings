@@ -27,7 +27,7 @@ function eraseCookie(name) {
 //
 function notify(ctx) {
    console.log("In notify: " + ctx.msg);
-   $('<link/>', {rel: 'stylesheet', href: ''}).appendTo('head');
+   $('<link/>', {rel: 'stylesheet', href: 'https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.css'}).appendTo('head');
    jQuery.getScript("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js")
          .done(function(script, textStatus) {
             console.log("jNotify script loaded. Status = " + textStatus);
