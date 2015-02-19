@@ -34,8 +34,8 @@ function notify(ctx) {
             jNotify(
 	        ctx.msg,
 	        {
-		  autoHide : true, // added in v2.0
-		  clickOverlay : false, // added in v2.0
+		  autoHide : true,
+		  clickOverlay : false,
 		  MinWidth : 250,
 		  TimeShown : 5000,
 		  ShowTimeEffect : 200,
@@ -46,10 +46,10 @@ function notify(ctx) {
 		  ShowOverlay : true,
    		  ColorOverlay : '#000',
 		  OpacityOverlay : 0.3,
-		  onClosed : function(){ // added in v2.0
+		  onClosed : function(){
 		   
 		  },
-		  onCompleted : function(){ // added in v2.0
+		  onCompleted : function(){
 		   
 		  }
 	        }); // close jNotify   
