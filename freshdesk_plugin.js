@@ -132,6 +132,7 @@ function makePhoneCall(agent, customer) {
 
 function listenForPopupNotifications() {
 	var source = new EventSource('http://54.251.123.50:11111/update-stream/' + KNOWLARITY_NUMBER);
+	console.log("Adding popup listener for: " + KNOWLARITY_NUMBER);
 	source.addEventListener('message', function(e) {
 		console.log(e);
 		var data = JSON.parse(e.data);
