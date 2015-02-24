@@ -31,7 +31,7 @@ function notify(ctx) {
    jQuery.getScript("https://rawgit.com/alpixel/jNotify/master/jquery/jNotify.jquery.min.js")
          .done(function(script, textStatus) {
             console.log("jNotify script loaded. Status = " + textStatus);
-            jNotify(
+            jSuccess(
 	        ctx.msg,
 	        {
 		  		autoHide : false,
@@ -44,7 +44,7 @@ function notify(ctx) {
 		  		HorizontalPosition : 'right',
 		  		VerticalPosition : 'top',
 		  		ShowOverlay : true,
-   		  		ColorOverlay : '#000',
+   		  		ColorOverlay : '#0f0',
 		  		OpacityOverlay : 0.3,
 		  		onClosed : function(){},
 		  		onCompleted : function(){}
