@@ -72,7 +72,7 @@ function extractAgentPhoneNumber(callback) {
     url = jQuery('div.#LoggedOptions > a')[0].href;
     console.log(url);
     var re = /(\d+)/;
-    user_id = re.exec(url)[0];
+    user_id = re.exec(url)[1];
     user_id = parseInt(user_id);
     console.log("User ID: " + user_id);
     
