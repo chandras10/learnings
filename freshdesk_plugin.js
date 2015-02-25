@@ -83,7 +83,8 @@ function extractAgentPhoneNumber(callback) {
         url: "/agents.json",
         success: function(response) {
           response.forEach(function(rec) {
-            console.log(rec);
+            console.log("Agent: " + rec.agent.user_id);
+            console.log("User_ID: " + user_id);
             if (rec.agent.user_id == user_id) {
               var data = {id: rec.agent.id, phone: rec.agent.user.phone, mobile: rec.agent.user.mobile};
               createCookie(userCookieName, JSON.stringify(data));
