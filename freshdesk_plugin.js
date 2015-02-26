@@ -119,6 +119,7 @@ function makePhoneCall(agent, customer) {
       method: "GET",
       url: 'http://www.knowlarity.com/vr/api/click2call/',
       dataType: 'json',
+      xhrFields: 'withCredentials': true,
       data: {api_key: KNOWLARITY_API_KEY, 
              sr_number: KNOWLARITY_NUMBER, 
              response_format: 'json',
