@@ -62,8 +62,8 @@ function extractAgentPhoneNumber(callback) {
     if (userInfo) {
        var user = JSON.parse(userInfo);
        if (user) {
-			if (user.phone) return callback(user.phone);
 			if (user.mobile) return callback(user.mobile);
+			if (user.phone) return callback(user.phone);
        		return callback(undefined);
        }
     }
@@ -73,27 +73,35 @@ function extractAgentPhoneNumber(callback) {
     console.log(url);
     var re = /profiles\/(\d+)\//;
     user_id = re.exec(url)[1];
-    user_id = parseInt(user_id);
     console.log("User ID: " + user_id);
+    if (!user_id || (user_id.length < 10)) {
+    	notify({msg: "Unable to get the logged in agent's phone number."});
+    	return callback(undefined);
+    }
     
     //Search for this user_id in the agents database.
     //If found, extract the phone number
     jQuery.ajax({
         type: "GET",
         dataType: "json",
-        url: "/agents.json",
+        url: "/contacts/"+user_id+".json",
         success: function(response) {
-          response.forEach(function(rec) {
-            console.log("Agent: " + rec.agent.user_id);
-            console.log("User_ID: " + user_id);
-            if (rec.agent.user_id == user_id) {
-              var data = {id: rec.agent.id, phone: rec.agent.user.phone, mobile: rec.agent.user.mobile};
-              createCookie(userCookieName, JSON.stringify(data));
-              if (rec.agent.user.phone) return callback(rec.agent.user.phone);
-              if (rec.agent.user.mobile) return callback(rec.agent.user.mobile);
-              return callback(undefined);
-            }
-          });
+          if (!response || !response.user) {
+    		notify({msg: "Unable to get the logged in agent's phone number."});
+    		return callback(undefined);
+          }
+          var agent = response.user;
+          if ((!agent.phone  || (agent.phone.length == 0) || !agent.phone.trim()) &&
+              (!agent.mobile || (agent.mobile.length == 0) || !agent.mobile.trim())) {
+    		notify({msg: "Unable to get the logged in agent's phone number."});
+    		return callback(undefined);
+          }
+          
+          var data = {id: agent.id, phone: agent.phone, mobile: agent.mobile};
+          createCookie(userCookieName, JSON.stringify(data));
+          if (agent.mobile) return callback(agent.mobile);
+          if (agent.phone) return callback(agent.phone);
+          return callback(undefined);
         } //success
     });
 } //extractAgentPhoneNumber()
