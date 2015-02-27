@@ -73,15 +73,15 @@ function extractAgentPhoneNumber(callback) {
     var userInfo = readCookie(userCookieName);
     if (userInfo) {
        var user = JSON.parse(userInfo);
-       if (user) {
-       	    if (user.id.trim() !== user_id.trim()) {
-       	    	//Cookie was for another Agent. Refresh it with the new logged-in Agent.
-       	    	eraseCookie(userCookieName);
-       	    } else {
-				if (user.mobile) return callback(user.mobile);
-				if (user.phone) return callback(user.phone);
-       			return callback(undefined);
-       	    }
+       if (user && user.id) {
+            if (user.id !== parseInt(user_id)) {
+                //Cookie was for another Agent. Refresh it with the new logged-in Agent.
+                eraseCookie(userCookieName);
+            } else {
+                if (user.mobile) return callback(user.mobile);
+                if (user.phone) return callback(user.phone);
+                return callback(undefined);
+            }
        }
     }
     //
