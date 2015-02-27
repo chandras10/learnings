@@ -58,16 +58,7 @@ function notify(ctx) {
 
 var userCookieName = 'knowlarity_fd_user_info';
 function extractAgentPhoneNumber(callback) {
-    var userInfo = readCookie(userCookieName);
-    if (userInfo) {
-       var user = JSON.parse(userInfo);
-       if (user) {
-			if (user.mobile) return callback(user.mobile);
-			if (user.phone) return callback(user.phone);
-       		return callback(undefined);
-       }
-    }
-    //
+
     // Obtain agent user_id
     url = jQuery('div.#LoggedOptions > a')[0].href;
     console.log(url);
@@ -78,7 +69,22 @@ function extractAgentPhoneNumber(callback) {
     	notify({msg: "Unable to get the logged in agent's phone number."});
     	return callback(undefined);
     }
-    
+
+    var userInfo = readCookie(userCookieName);
+    if (userInfo) {
+       var user = JSON.parse(userInfo);
+       if (user) {
+       	    if (user.id.trim() !== user_id.trim()) {
+       	    	//Cookie was for another Agent. Refresh it with the new logged-in Agent.
+       	    	eraseCookie(userCookieName);
+       	    } else {
+				if (user.mobile) return callback(user.mobile);
+				if (user.phone) return callback(user.phone);
+       			return callback(undefined);
+       	    }
+       }
+    }
+    //
     //Search for this user_id in the agents database.
     //If found, extract the phone number
     jQuery.ajax({
